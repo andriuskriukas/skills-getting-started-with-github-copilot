@@ -38,6 +38,42 @@ activities = {
         "schedule": "Mondays, Wednesdays, Fridays, 2:00 PM - 3:00 PM",
         "max_participants": 30,
         "participants": ["john@mergington.edu", "olivia@mergington.edu"]
+    },
+    "Soccer Team": {
+        "description": "Team-based soccer training and friendly matches",
+        "schedule": "Tuesdays and Thursdays, 4:00 PM - 5:30 PM",
+        "max_participants": 18,
+        "participants": []
+    },
+    "Basketball Club": {
+        "description": "Improve basketball skills and play weekly scrimmages",
+        "schedule": "Wednesdays and Fridays, 4:00 PM - 5:30 PM",
+        "max_participants": 16,
+        "participants": []
+    },
+    "Drama Club": {
+        "description": "Rehearse scenes, perform plays, and build stage confidence",
+        "schedule": "Mondays and Thursdays, 3:30 PM - 5:00 PM",
+        "max_participants": 20,
+        "participants": []
+    },
+    "Art Studio": {
+        "description": "Explore drawing, painting, and mixed-media art projects",
+        "schedule": "Tuesdays and Fridays, 3:30 PM - 5:00 PM",
+        "max_participants": 15,
+        "participants": []
+    },
+    "Math Olympiad": {
+        "description": "Solve challenging math problems and prepare for competitions",
+        "schedule": "Wednesdays, 3:30 PM - 5:00 PM",
+        "max_participants": 12,
+        "participants": []
+    },
+    "Chess Club Advanced": {
+        "description": "Advanced strategy sessions and competitive chess play",
+        "schedule": "Fridays, 4:00 PM - 5:30 PM",
+        "max_participants": 12,
+        "participants": []
     }
 }
 
@@ -61,6 +97,11 @@ def signup_for_activity(activity_name: str, email: str):
 
     # Get the specific activity
     activity = activities[activity_name]
+
+    # validate the student haven't signed up already
+    if email in activity["participants"]:
+        raise HTTPException(status_code=400, detail="Student already signed up for this activity")
+
 
     # Add student
     activity["participants"].append(email)
